@@ -145,11 +145,7 @@ class Pixel4D:
 	def __repr__(self):
 		return self.__str__()
 
-def main_jpg(filename):
-	img = Image.open(filename)
-	pixels = img.load()
-	width, height = img.size
-
+def main_3d(filename):
 	for x in range(width):
 		for y in range(height):
 			# Cast pixel values to Pixel4D
@@ -177,13 +173,7 @@ def main_jpg(filename):
 			# Change the pixel to the average
 			pixels[x, y] = (int(average.r), int(average.g), int(average.b))
 
-	img.save(f"{filename[:-4]}_blended.jpg")
-
-def main_png(filename):
-	img = Image.open(filename)
-	pixels = img.load()
-	width, height = img.size
-
+def main_4d(filename):
 	for x in range(width):
 		for y in range(height):
 			# Cast pixel values to Pixel4D
@@ -216,14 +206,17 @@ def main_png(filename):
 			# set the pixel to the average
 			pixels[x, y] = (int(average.r), int(average.g), int(average.b), int(average.a))
 
-	img.save(f"{filename[:-4]}_blended.png")
-
 if __name__ == "__main__":
 	filename = askopenfilename()
-	if filename.endswith(".png"):
-		main_png(filename)
-	elif filename.endswith(".jpg"):
-		main_jpg(filename)
-	else:
-		print("Invalid file type")
-		exit()
+	
+	img = Image.open(filename)
+	pixels = img.load()
+	width, height = img.size
+
+	sample = pixels[0, 0]
+	if len(sample) == 3:
+		main_3d(filename)
+	elif len(sample) == 4:
+		main_4d(filename)
+
+	img.save(filename)

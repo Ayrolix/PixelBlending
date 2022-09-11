@@ -2,10 +2,10 @@ from PIL import Image
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
 
-#---------------------------------------------------------#
+#-----------------------------------------------------------#
 # Pixel Blending by Narukami
-# This could be much more efficient probably but it works
-#---------------------------------------------------------#
+# This could be much more efficient, probably, but it works
+#-----------------------------------------------------------#
 
 class Pixel3D:
 	def __init__(self, *color):
